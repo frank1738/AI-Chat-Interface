@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { CustomSelect } from './composer/CustomSelect';
+import {
+  TONE_OPTIONS,
+  REPLY_STYLES,
+  RESPONSE_LENGTH_LABELS,
+} from '@/lib/chat/utils';
 
 export interface RequestOptions {
   tone: 'Professional' | 'Casual' | 'Humorous' | 'Concise';
@@ -23,58 +22,14 @@ interface RequestOptionsPanelProps {
   DEFAULT_OPTIONS: RequestOptions;
 }
 
-const TONE_OPTIONS = ['Professional', 'Casual', 'Humorous', 'Concise'] as const;
-const REPLY_STYLES = [
-  { value: 'summary', label: 'Summary Paragraph' },
-  { value: 'bullets', label: 'Bullet Points' },
-  { value: 'steps', label: 'Numbered Steps' },
-  { value: 'quip', label: 'Short Quip' },
-  { value: 'definition', label: 'Definition' },
-  { value: 'qa', label: 'Q&A' },
-] as const;
-const RESPONSE_LENGTH_LABELS = [
-  'Very Short',
-  'Short',
-  'Brief',
-  'Medium',
-  'Moderate',
-  'Long',
-  'Very Long',
-  'Extended',
-  'Detailed',
-  'Comprehensive',
-];
-
 export function RequestOptionsPanel({
-  onClose,
   onOptionsChange,
   DEFAULT_OPTIONS,
 }: RequestOptionsPanelProps) {
   const [options, setOptions] = useState<RequestOptions>(DEFAULT_OPTIONS);
 
   const handleToneChange = (tone: string) => {
-    const updated = {
-      ...options,
-      tone: tone as RequestOptions['tone'],
-    };
-    setOptions(updated);
-    onOptionsChange?.(updated);
-  };
-
-  const handleResponseLengthChange = (values: number[]) => {
-    const updated = {
-      ...options,
-      responseLength: values[0],
-    };
-    setOptions(updated);
-    onOptionsChange?.(updated);
-  };
-
-  const handleIncludeOutlineChange = (checked: boolean) => {
-    const updated = {
-      ...options,
-      includeOutline: checked,
-    };
+    const updated = { ...options, tone: tone as RequestOptions['tone'] };
     setOptions(updated);
     onOptionsChange?.(updated);
   };
@@ -88,64 +43,40 @@ export function RequestOptionsPanel({
     onOptionsChange?.(updated);
   };
 
+  const handleResponseLengthChange = (values: number[]) => {
+    const updated = { ...options, responseLength: values[0] };
+    setOptions(updated);
+    onOptionsChange?.(updated);
+  };
+
+  const handleIncludeOutlineChange = (checked: boolean) => {
+    const updated = { ...options, includeOutline: checked };
+    setOptions(updated);
+    onOptionsChange?.(updated);
+  };
+
   return (
     <div className="space-y-6">
-      <div className="space-y-2">
-        <Label
-          htmlFor="tone-select"
-          className="text-sm font-medium text-foreground"
-        >
-          Tone
-        </Label>
-        <Select value={options.tone} onValueChange={handleToneChange}>
-          <SelectTrigger
-            id="tone-select"
-            className="w-full bg-card border-border text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
-          >
-            <SelectValue placeholder="Select tone" />
-          </SelectTrigger>
+      <CustomSelect
+        id="tone-select"
+        label="Tone"
+        placeholder="Select tone"
+        value={options.tone}
+        onValueChange={handleToneChange}
+        options={TONE_OPTIONS.map((tone) => ({ value: tone, label: tone }))}
+      />
 
-          <SelectContent className="bg-card border-border">
-            {TONE_OPTIONS.map((tone) => (
-              <SelectItem key={tone} value={tone} className="text-foreground">
-                {tone}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div className="space-y-2">
-        <Label
-          htmlFor="tone-select"
-          className="text-sm font-medium text-foreground"
-        >
-          Reply Style
-        </Label>
-        <Select
-          value={options.replyStyle}
-          onValueChange={handleReplyStyleChange}
-        >
-          <SelectTrigger
-            id="tone-select"
-            className="w-full bg-card border-border text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
-          >
-            <SelectValue placeholder="Select tone" />
-          </SelectTrigger>
-
-          <SelectContent className="bg-card border-border">
-            {REPLY_STYLES.map((style) => (
-              <SelectItem
-                key={style.value}
-                value={style.value}
-                className="text-foreground"
-              >
-                {style.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <CustomSelect
+        id="reply-style-select"
+        label="Reply Style"
+        placeholder="Select reply style"
+        value={options.replyStyle}
+        onValueChange={handleReplyStyleChange}
+        options={REPLY_STYLES.map((style) => ({
+          value: style.value,
+          label: style.label,
+        }))}
+      />
 
       <div className="space-y-3">
         <div className="flex items-center justify-between">
@@ -159,6 +90,7 @@ export function RequestOptionsPanel({
             {RESPONSE_LENGTH_LABELS[options.responseLength - 1]}
           </span>
         </div>
+
         <Slider
           id="response-length"
           min={1}
@@ -166,7 +98,7 @@ export function RequestOptionsPanel({
           step={1}
           value={[options.responseLength]}
           onValueChange={handleResponseLengthChange}
-          className="w-full [&>[data-orientation=horizontal]>div:first-child]:bg-red-500"
+          className="w-full "
         />
 
         <div className="flex justify-between text-xs text-muted-foreground">

@@ -15,3 +15,30 @@ export function formatLocalTime(timeString: string): string {
 
   return formatted;
 }
+
+export const TONE_OPTIONS = [
+  'Professional',
+  'Casual',
+  'Humorous',
+  'Concise',
+] as const;
+export const REPLY_STYLES = [
+  { value: 'summary', label: 'Summary Paragraph' },
+  { value: 'bullets', label: 'Bullet Points' },
+  { value: 'steps', label: 'Numbered Steps' },
+  { value: 'quip', label: 'Short Quip' },
+  { value: 'definition', label: 'Definition' },
+  { value: 'qa', label: 'Q&A' },
+] as const;
+export const RESPONSE_LENGTH_LABELS = [
+  'Very Short',
+  'Short',
+  'Brief',
+  'Medium',
+  'Moderate',
+  'Long',
+  'Very Long',
+  'Extended',
+  'Detailed',
+  'Comprehensive',
+];
