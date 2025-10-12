@@ -84,8 +84,8 @@ Or scan this QR code to open it on your mobile device:
 ### Architecture Overview
 
 ```
-[Architectural Diagram Placeholder]
-(Will be replaced with a visual representation of the system architecture)
+<img width="765" height="907" alt="image" src="https://github.com/user-attachments/assets/be6e3042-7937-4004-90b9-7060e26fe93d" />
+
 ```
 
 ### Directory Structure
