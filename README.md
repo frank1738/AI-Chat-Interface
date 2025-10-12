@@ -69,6 +69,16 @@ Note: Reply Tone only affects the AI's responses to the predefined chatbot quest
 4. **Open in browser**
    The application will be available at `http://localhost:5173`
 
+## Live Demo
+
+Check out the live demo of the application:
+
+[![Live Demo](https://img.shields.io/badge/🚀-Live_Demo-4CAF50?style=for-the-badge&logo=vercel&logoColor=white)](https://your-demo-url.vercel.app)
+
+Or scan this QR code to open it on your mobile device:
+
+![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://your-demo-url.vercel.app)
+
 ## Project Structure
 
 ### Architecture Overview
