@@ -26,6 +26,16 @@ A modern, responsive chat interface built with React, TypeScript, and Vite, feat
 - **Code Highlighting**: react-syntax-highlighter
 - **Markdown Support**: react-markdown with rehype and remark plugins
 
+## Chat Customization
+
+The chat interface provides several customization options to tailor the responses to your preferences:
+
+- **Reply Tone**: Adjusts the tone of the AI's responses to the predefined chatbot questions (e.g., Professional, Casual, Friendly, Technical)
+- **Reply Style**: Controls the structure of AI-generated content, affecting both SEO-optimized and ChatGPT responses (e.g., Concise, Detailed, Step-by-step, Bullet points)
+- **Response Length**: Manages the verbosity of AI-generated content for both SEO and ChatGPT responses (Short, Medium, Long)
+
+Note: Reply Tone only affects the AI's responses to the predefined chatbot questions, while Reply Style and Response Length impact the generated content for both SEO and ChatGPT responses.
+
 ## Prerequisites
 
 - Node.js 16+ (LTS recommended)
