@@ -77,16 +77,14 @@ Check out the live demo of the application:
 
 Or scan this QR code to open it on your mobile device:
 
-![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://your-demo-url.vercel.app)
+![QR Code](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://ai-chat-interface-ashy.vercel.app/)
 
 ## Project Structure
 
 ### Architecture Overview
 
-```
-<img width="765" height="907" alt="image" src="https://github.com/user-attachments/assets/be6e3042-7937-4004-90b9-7060e26fe93d" />
+<img width="765" height="907" alt="image" src="https://github.com/user-attachments/assets/f77d64c4-fa44-4836-ac5d-330d63b266e7" />
 
-```
 
 ### Directory Structure
 
