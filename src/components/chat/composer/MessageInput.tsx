@@ -28,7 +28,7 @@ export function MessageInput({
         onKeyDown={handleNewLine}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        placeholder="Summarize the latest"
+        placeholder="Create content"
         disabled={disabled}
         className="min-h-[44px] resize-none bg-transparent border-0 outline-none"
       />

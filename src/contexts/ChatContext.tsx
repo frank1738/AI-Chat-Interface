@@ -1,12 +1,8 @@
-// src/context/ChatContext.tsx
-
 import { createContext, useState, ReactNode } from 'react';
 import { Message, ChatContextType } from '@/types/chat';
 import { getAgentResponse } from '@/services/agent';
-import {
-  conversationFlow,
-  AgentResponseContent,
-} from '@/lib/chat/conversationFlow';
+import { AgentResponseContent } from '@/types/agent';
+import { conversationFlow } from '@/lib/chat/conversationFlow';
 
 export const ChatContext = createContext<ChatContextType | undefined>(
   undefined
