@@ -14,14 +14,22 @@ import { MessageInput } from './composer/MessageInput';
 import { SendButton } from './composer/SendButton';
 
 import type { ComposerProps } from '@/types/chat';
+import StreamingButton from './composer/StreamingButton';
 
 const MAX_FILES = 5;
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
-export function Composer({ onSend, disabled }: ComposerProps) {
+export function Composer({
+  onSend,
+  disabled,
+  startStream,
+  isStreaming,
+  stopStream,
+}: ComposerProps) {
   const [message, setMessage] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
+
   const [options, setOptions] = useState<RequestOptions>({
     tone: 'Professional',
     responseLength: 5,
@@ -36,6 +44,7 @@ export function Composer({ onSend, disabled }: ComposerProps) {
   const canSend = message.trim() || attachedFiles.length > 0;
 
   const handleSubmit = (e?: React.FormEvent) => {
+    startStream();
     e?.preventDefault();
     if (!canSend || disabled) return;
 
@@ -57,6 +66,10 @@ export function Composer({ onSend, disabled }: ComposerProps) {
   };
 
   const handleNewLine = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (isStreaming) {
+      return;
+    }
+
     const el = e.target as HTMLTextAreaElement;
 
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -110,6 +123,10 @@ export function Composer({ onSend, disabled }: ComposerProps) {
     setAttachedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
+  const handleStopStream = () => {
+    stopStream();
+  };
+
   return (
     <div className="w-full px-4 md:px-0" ref={composerRef}>
       <div
@@ -131,11 +148,15 @@ export function Composer({ onSend, disabled }: ComposerProps) {
             disabled={disabled}
           />
 
-          <SendButton
-            canSend={!!canSend}
-            disabled={!!disabled}
-            handleSubmit={handleSubmit}
-          />
+          {isStreaming ? (
+            <StreamingButton handleStopStream={handleStopStream} />
+          ) : (
+            <SendButton
+              canSend={!!canSend}
+              disabled={!!disabled}
+              handleSubmit={handleSubmit}
+            />
+          )}
         </div>
 
         <div className="flex items-center gap-3 px-4 pb-4 pt-3 bg-card">

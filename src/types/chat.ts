@@ -11,8 +11,8 @@ export interface Message {
   sender: 'user' | 'assistant';
   text: string;
   tone: string;
-  length: number;
-  includeOutline: boolean;
+  length?: number;
+  includeOutline?: boolean;
   hasAttachedFiles?: boolean;
   lastUserTopic?: string;
   is_file_uploaded?: boolean;
@@ -34,4 +34,7 @@ export interface ChatMessageProps {
 export interface ComposerProps {
   onSend: (message: Message) => void;
   disabled?: boolean;
+  startStream: () => void;
+  isStreaming: boolean;
+  stopStream: () => void;
 }

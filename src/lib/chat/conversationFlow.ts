@@ -1,5 +1,16 @@
 import { ConversationStep } from '@/types/agent';
 import { contentResponseGenerator } from '../data/contentGenerator';
+import { Message } from '@/types';
+
+export const initialMessage: Message = {
+  id: '1',
+  sender: 'assistant',
+  text: "Welcome to our SEO content manager. Would you like to create content? (Type 'yes' or 'no')",
+  tone: 'professional',
+  length: 7,
+  includeOutline: false,
+  time: Date.now().toString(),
+};
 
 export const conversationFlow: ConversationStep[] = [
   {
