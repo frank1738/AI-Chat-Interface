@@ -4,6 +4,8 @@ import { ChatProvider } from '@/contexts/ChatContext';
 import Index from '@/pages/Index';
 import NotFound from '@/pages/NotFound';
 import Interview from './pages/Interview';
+import Composition from './pages/Composition';
+import Compiler from './pages/Compiler';
 
 const App = () => (
   <ThemeProvider defaultTheme="light" storageKey="ai-chat-theme">
@@ -11,8 +13,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-           <Route path="/interview" element={<Interview />} />
+          <Route path="/interview" element={<Interview />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/composition" element={<Composition />}></Route>
+          <Route path="/compiler" element={<Compiler />}></Route>
         </Routes>
       </BrowserRouter>
     </ChatProvider>
